@@ -1,0 +1,148 @@
+package co.com.aptamob.core.service;
+
+import co.com.aptamob.security.config.ApplicationConfig;
+import co.com.aptamob.core.base.service.*;
+import co.com.aptamob.core.api.departamento.*;
+import co.com.aptamob.core.bo.Departamento;
+import co.com.aptamob.core.exception.DataDuplicateException;
+import co.com.aptamob.core.exception.DataNotFoundException;
+import co.com.aptamob.core.repository.IDepartamentoRepository;
+import co.com.aptamob.core.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import javax.validation.Validator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service("departamentoService")
+public class DepartamentoServiceImpl extends BaseService implements IDepartamentoService{
+	
+	private IDepartamentoRepository departamentoR;
+	
+	public DepartamentoServiceImpl(Validator validator) {
+        super(validator);
+    }
+	
+	@Autowired
+	public DepartamentoServiceImpl(IDepartamentoRepository repository, 
+			Validator validator) {
+        this(validator);
+        this.departamentoR = repository;
+    }
+	
+	private static final Logger LOG = LoggerFactory.getLogger(DepartamentoServiceImpl.class);
+	
+	@Transactional
+	public DepartamentoApi createDepartamento(DepartamentoApi departamentoRequest){
+		validate(departamentoRequest);
+        
+        Departamento dep = departamentoR.findByNombre(departamentoRequest.getNombre());
+        if(dep != null){
+        	throw new DataDuplicateException(Departamento.class.getName());
+        }
+        
+        departamentoR.save(dep);
+        
+        return new DepartamentoApi(dep);
+	}
+	
+	@Transactional
+	public DepartamentoApi saveDepartamento(DepartamentoApi departamentoRequest, String codigo){
+		validate(departamentoRequest);
+		
+		Departamento dep = cargaDepartamento(codigo);
+		
+		if(departamentoRequest.getNombre() != null){
+			dep.setNombre(departamentoRequest.getNombre());
+		}
+		
+		departamentoR.save(dep);
+		
+		return new DepartamentoApi(dep);
+	}
+	
+	@Transactional
+	public DepartamentoApi getDepartamento(DepartamentoApi departamentoRequest, String codigo){
+		Assert.notNull(departamentoRequest);
+        Assert.notNull(codigo);
+        
+        Departamento dep = cargaDepartamento(codigo);
+        
+        /*if(!requestingUser.getId().equals(user.getUuid().toString()) && !requestingUser.getRole().equalsIgnoreCase(Role.administrator.toString()))  {
+            throw new AuthorizationException("User not authorized to load profile");
+         }*/
+        
+        return new DepartamentoApi(dep);
+	}
+	
+	@Transactional
+	public List<DepartamentoApi> getDepartamentos(){
+		List<DepartamentoApi> apis = new ArrayList<DepartamentoApi> ();
+		
+		List<Departamento> deps = departamentoR.findAll();
+		if(deps == null || deps.size() == 0){
+			throw new DataNotFoundException(Departamento.class.getName(),Departamento.class.getName());
+		}
+		
+		for(Departamento dep : deps){
+			apis.add(new DepartamentoApi(dep));
+		}
+		
+		return apis;
+	}
+	
+	@Transactional
+	public List<DepartamentoApi> getDepartamentos(String nombre){
+		Assert.notNull(nombre);
+		List<DepartamentoApi> apis = new ArrayList<DepartamentoApi> ();
+		
+		List<Departamento> deps = departamentoR.findByNombreIgnoreCaseContaining(nombre);
+		if(deps == null || deps.size() == 0){
+			throw new DataNotFoundException(Departamento.class.getName());
+		}
+		
+		for(Departamento dep : deps){
+			apis.add(new DepartamentoApi(dep));
+		}
+		
+		return apis;
+	}
+	
+	@Transactional
+	public void deleteDepartamento(DepartamentoApi departamentoRequest, String codigo){
+		Assert.notNull(departamentoRequest);
+        Assert.notNull(codigo);
+        
+        Departamento dep = cargaDepartamento(codigo);
+        
+        //if (userMakingRequest.getRole().equalsIgnoreCase(Role.administrator.toString()) && (userToDelete.hasRole(Role.anonymous) || userToDelete.hasRole(Role.authenticated))) {
+        	departamentoR.delete(dep);
+        /*} else {
+            throw new AuthorizationException("User cannot be deleted. Only users with anonymous or authenticated role can be deleted.");
+        }*/
+	}
+	
+	private Departamento cargaDepartamento(String identificador){
+		Departamento dep = null;
+		if(StringUtil.isValidUuid(identificador)){
+			dep = departamentoR.findByUuid(identificador);
+		}
+		
+		if(dep == null){
+			throw new DataNotFoundException(Departamento.class.getName());
+		}
+		
+		return dep;
+	}
+	
+	@Autowired
+	public void setDepartamentoR(IDepartamentoRepository departamentoR) {
+		this.departamentoR = departamentoR;
+	}
+}
