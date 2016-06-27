@@ -179,17 +179,7 @@ task stage {
 }
 
 
-[jettyRun, jettyRunWar, jettyStop]*.stopPort = 7070
-[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stopKey'
-
-task integrationTest(type: Test) {
-    include '**/*IntegrationTest*.*'
-    doFirst {
-        jettyRun.daemon = true
-        jettyRun.execute()
-    }
-    doLast {
-        jettyStop.execute()
-    }
-
+jettyRun {
+    contextPath = ''
+    scanIntervalSeconds = 2
 }
