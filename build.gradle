@@ -114,7 +114,8 @@ dependencies {
             "javax.mail:mail:1.4.5",
             "joda-time:joda-time:2.1",
             "commons-lang:commons-lang:2.6",
-            "commons-cli:commons-cli:1.2"
+            "commons-cli:commons-cli:1.2",
+            'org.eclipse.jetty:jetty-servlet:7.4.5.v20110725'
 
     // Pull in test-time dependencies.
     testCompile "junit:junit:4.12",
@@ -174,9 +175,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
-task stage {
-     dependsOn build
-}
+task stage(dependsOn: ['clean', 'installApp'])
 
 
 jettyRun {
