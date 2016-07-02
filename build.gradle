@@ -51,7 +51,8 @@ buildscript {
 
     dependencies {
 
-        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0',
+        remoteSources 'com.github.jsimone:webapp-runner:8.0.24.0'
 
     }
 }
