@@ -5,9 +5,6 @@ apply plugin: 'war'
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'jetty'
-apply plugin:'application'
-
-mainClassName = "Principal"
 
 ext {
     springVersion = "4.1.5.RELEASE"
@@ -118,7 +115,7 @@ dependencies {
             "commons-lang:commons-lang:2.6",
             "commons-cli:commons-cli:1.2",
             'org.eclipse.jetty:jetty-servlet:7.4.5.v20110725',
-            'com.github.jsimone:webapp-runner:8.0.24.0'
+            'com.github.jsimone:webapp-runner:8.0.30.2'
 
     // Pull in test-time dependencies.
     testCompile "junit:junit:4.12",
@@ -178,7 +175,25 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
-task stage(dependsOn: ['clean', 'installApp'])
+task stage() {
+    dependsOn clean, war
+}
+tasks.stage.doLast() {
+    delete fileTree(dir: "build/distributions")
+    delete fileTree(dir: "build/assetCompile")
+    delete fileTree(dir: "build/distributions")
+    delete fileTree(dir: "build/libs", exclude: "*.war")
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
 
 
 jettyRun {
