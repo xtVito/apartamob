@@ -62,9 +62,9 @@ repositories {
 
 // A list of all of our project dependencies.
 dependencies {
-	compile group: 	'io.swagger', name: 'swagger-core', version: '1.5.9',
-					'io.swagger:swagger-jaxrs:jar:1.5.9',
-					'io.swagger:swagger-annotations:jar:1.5.9'
+	//compile group: 	'io.swagger', name: 'swagger-core', version: '1.5.9',
+	//				'io.swagger:swagger-jaxrs:jar:1.5.9',
+	//				'io.swagger:swagger-annotations:jar:1.5.9'
     compile "org.hibernate:hibernate-core:$hibernateVersion",
             "org.hibernate:hibernate-entitymanager:$hibernateVersion",
             "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final",
@@ -117,9 +117,9 @@ dependencies {
             "commons-lang:commons-lang:2.6",
             "commons-cli:commons-cli:1.2",
             'org.eclipse.jetty:jetty-servlet:7.4.5.v20110725',
-            'com.github.jsimone:webapp-runner:8.0.30.2',
-            'io.swagger:swagger-core:jar:1.5.9',
-            'io.swagger:swagger-annotations:jar:1.5.9'
+            'com.github.jsimone:webapp-runner:8.0.30.2'
+            //'io.swagger:swagger-core:jar:1.5.9',
+            //'io.swagger:swagger-annotations:jar:1.5.9'
 
     // Pull in test-time dependencies.
     testCompile "junit:junit:4.12",
