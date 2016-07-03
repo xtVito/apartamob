@@ -20,5 +20,9 @@ public abstract class BaseService {
             throw new ValidationException(constraintViolations);
         }
     }
-
+    
+    protected String getClassName(String entidad){
+    	String[] clase = entidad.split("\\.");
+		return clase[clase.length-1].toLowerCase();
+    }
 }

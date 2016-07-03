@@ -23,7 +23,7 @@
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>co.com.aptamob.core.resource</param-value>
+            <param-value>co.com.aptamob.core.resource;io.swagger.jaxrs</param-value>
         </init-param>
 
         <init-param>
@@ -34,6 +34,14 @@
             <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
             <param-value>com.porterhead.rest.filter.ResourceFilterFactory</param-value>
         </init-param-->
+	    <init-param>
+	        <param-name>swagger.api.basepath</param-name>
+	        <param-value>http://localhost:7070/amapi/v1/api-doc</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>api.version</param-name>
+	        <param-value>1.0</param-value>
+	    </init-param>
 
 	</servlet>
 

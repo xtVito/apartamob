@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface ICiudadRepository extends JpaRepository<Ciudad, Long> {
 	
-	@Query("select c from Ciudad c where c.uuid = ?")
-	Ciudad findByUuid(String uuid);
+	@Query("select c from Ciudad c where c.id = ?")
+	Ciudad findByUuid(String id);
 	
-	@Query("select c from Ciudad c join c.departamento d where d.uuid = ?")
-	List<Ciudad> findByDepartamentoId(String uuid);
+	@Query("select c from Ciudad c join c.departamento d where d.id = ?")
+	List<Ciudad> findByDepartamentoId(String id);
 	
 	List<Ciudad> findByNombreIgnoreCaseContaining(String nombre);
 }

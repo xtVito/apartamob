@@ -44,7 +44,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
         
         Departamento dep = departamentoR.findByNombre(departamentoRequest.getNombre());
         if(dep != null){
-        	throw new DataDuplicateException(Departamento.class.getName());
+        	throw new DataDuplicateException(getClassName(Departamento.class.getName()), getClassName(Departamento.class.getName()));
         }
         
         departamentoR.save(dep);
@@ -68,15 +68,10 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	}
 	
 	@Transactional
-	public DepartamentoApi getDepartamento(DepartamentoApi departamentoRequest, String codigo){
-		Assert.notNull(departamentoRequest);
+	public DepartamentoApi getDepartamento(String codigo){
         Assert.notNull(codigo);
         
         Departamento dep = cargaDepartamento(codigo);
-        
-        /*if(!requestingUser.getId().equals(user.getUuid().toString()) && !requestingUser.getRole().equalsIgnoreCase(Role.administrator.toString()))  {
-            throw new AuthorizationException("User not authorized to load profile");
-         }*/
         
         return new DepartamentoApi(dep);
 	}
@@ -87,7 +82,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 		
 		List<Departamento> deps = departamentoR.findAll();
 		if(deps == null || deps.size() == 0){
-			throw new DataNotFoundException(Departamento.class.getName(),Departamento.class.getName());
+			throw new DataNotFoundException(getClassName(Departamento.class.getName()));
 		}
 		
 		for(Departamento dep : deps){
@@ -104,7 +99,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 		
 		List<Departamento> deps = departamentoR.findByNombreIgnoreCaseContaining(nombre);
 		if(deps == null || deps.size() == 0){
-			throw new DataNotFoundException(Departamento.class.getName());
+			throw new DataNotFoundException(getClassName(Departamento.class.getName()));
 		}
 		
 		for(Departamento dep : deps){
@@ -130,12 +125,10 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	
 	private Departamento cargaDepartamento(String identificador){
 		Departamento dep = null;
-		if(StringUtil.isValidUuid(identificador)){
-			dep = departamentoR.findByUuid(identificador);
-		}
+		dep = departamentoR.findById(Long.parseLong(identificador));
 		
 		if(dep == null){
-			throw new DataNotFoundException(Departamento.class.getName());
+			throw new DataNotFoundException(getClassName(Departamento.class.getName()));
 		}
 		
 		return dep;

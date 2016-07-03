@@ -1,9 +1,8 @@
 package co.com.aptamob.core.bo;
 
-import java.util.UUID;
-
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.ciudad.CiudadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -17,16 +16,14 @@ public class Ciudad extends BaseEntity{
 	@Column(name="CIU_NOMBRE")
 	private String nombre;
 	
-	public Ciudad(){
-		this(UUID.randomUUID());
-	}
+	/*@ManyToMany(mappedBy="ciudades")
+	private List<Zona> zonas = new ArrayList<Zona>();*/
 	
-	public Ciudad(UUID uuid){
-		super(uuid);
-	}
+	public Ciudad(){}
 	
-	public String getClassName(){
-		return Ciudad.class.getName();
+	public Ciudad(CiudadApi api){
+		this();
+		this.nombre = api.getNombre();
 	}
 
 	public Departamento getDepartamento() {
@@ -44,4 +41,12 @@ public class Ciudad extends BaseEntity{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	/*public List<Zona> getZonas() {
+		return zonas;
+	}
+
+	public void setZonas(List<Zona> zonas) {
+		this.zonas = zonas;
+	}*/
 }

@@ -2,7 +2,6 @@ package co.com.aptamob.core.bo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -20,26 +19,22 @@ public class Departamento extends BaseEntity {
 	private String nombre;
 	
 	@OneToMany(mappedBy="departamento",
+            targetEntity=Zona.class,
+            cascade= CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Zona> zonas = new ArrayList<Zona>();
+	
+	@OneToMany(mappedBy="departamento",
             targetEntity=Ciudad.class,
             cascade= CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 	
-	public Departamento(){
-		this(UUID.randomUUID());
-	}
-	
-	public Departamento(UUID uuid){
-		super(uuid);
-	}
+	public Departamento(){}
 	
 	public Departamento(DepartamentoApi api){
 		this();
 		this.nombre = api.getNombre();
-	}
-	
-	public String getClassName(){
-		return Departamento.class.getName();
 	}
 
 	public String getNombre() {
@@ -48,6 +43,14 @@ public class Departamento extends BaseEntity {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public List<Zona> getZonas() {
+		return zonas;
+	}
+
+	public void setZonas(List<Zona> zonas) {
+		this.zonas = zonas;
 	}
 
 	public List<Ciudad> getCiudades() {

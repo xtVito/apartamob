@@ -1,8 +1,8 @@
 package co.com.aptamob.core.api.departamento;
 
-import co.com.aptamob.core.api.ciudad.CiudadApi;
-import co.com.aptamob.core.bo.Ciudad;
+import co.com.aptamob.core.api.zona.ZonaApi;
 import co.com.aptamob.core.bo.Departamento;
+import co.com.aptamob.core.bo.Zona;
 
 import org.hibernate.validator.constraints.Length;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -21,13 +21,13 @@ public class DepartamentoApi {
 	@Length(max=50)
 	private String nombre;
 	
-	private List<CiudadApi> ciudades = new ArrayList<CiudadApi>();
+	private List<ZonaApi> zonas = new ArrayList<ZonaApi>();
 	
 	public DepartamentoApi(Departamento departamento){
-		this.id = departamento.getUuid().toString();
+		this.id = departamento.getId().toString();
 		this.nombre = departamento.getNombre();
-		for(Ciudad ciu : departamento.getCiudades()){
-			ciudades.add(new CiudadApi(ciu));
+		for(Zona zon : departamento.getZonas()){
+			zonas.add(new ZonaApi(zon));
 		}
 	}
 
@@ -47,11 +47,11 @@ public class DepartamentoApi {
 		this.nombre = nombre;
 	}
 
-	public List<CiudadApi> getCiudades() {
-		return ciudades;
+	public List<ZonaApi> getZonas() {
+		return zonas;
 	}
 
-	public void setCiudades(List<CiudadApi> ciudades) {
-		this.ciudades = ciudades;
+	public void setZonas(List<ZonaApi> zonas) {
+		this.zonas = zonas;
 	}
 }

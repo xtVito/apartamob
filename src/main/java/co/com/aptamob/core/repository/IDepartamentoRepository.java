@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface IDepartamentoRepository extends JpaRepository<Departamento, Long> {
 	
-	@Query("select d from Departamento d where d.uuid = ?")
-	Departamento findByUuid(String uuid);
+	@Query("select d from Departamento d where d.id = ?")
+	Departamento findById(Long id);
 	
 	@Query("select d from Departamento d where d.nombre = ?")
 	Departamento findByNombre(String nombre);
