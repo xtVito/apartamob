@@ -8,9 +8,9 @@ import co.com.aptamob.core.api.departamento.DepartamentoApi;
 import co.com.aptamob.core.api.zona.ZonaApi;
 import co.com.aptamob.core.service.IDepartamentoService;
 import co.com.aptamob.security.config.ApplicationConfig;
-import io.swagger.annotations.Api;
+/*import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiParam;*/
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -20,7 +20,7 @@ import java.net.URI;
 import java.util.List;
 
 @Path("/departamento")
-@Api(value = "/departamento")
+//@Api(value = "/departamento")
 @Component
 @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 @Consumes({MediaType.APPLICATION_JSON})
@@ -43,10 +43,10 @@ public class DepartamentoResource {
 	@PermitAll
 	@Path("all")
 	@GET
-	@ApiOperation(
+	/*@ApiOperation(
         value = "Devuelve todos los departamentos",
         notes = "Devuelve todos los departamentos"
-    )
+    )*/
 	public Response listarDepartamentos(){
 		List<DepartamentoApi> deps = departamentoS.getDepartamentos();
 		return Response.ok(deps.toArray(new DepartamentoApi[deps.size()])).build();
@@ -55,11 +55,11 @@ public class DepartamentoResource {
 	@PermitAll
 	@Path("{id}")
 	@GET
-	@ApiOperation(
+	/*@ApiOperation(
         value = "Devuelve un departamento",
         notes = "Devuelve un departamento buscado por id"
-    )
-	public Response obtenerDepartamento(@ApiParam(value="id") @PathParam("id") String id){
+    )*/
+	public Response obtenerDepartamento(/*@ApiParam(value="id")*/ @PathParam("id") String id){
 		DepartamentoApi dep = departamentoS.getDepartamento(id);
 		return Response.ok(dep).build();
 	}
@@ -67,11 +67,11 @@ public class DepartamentoResource {
 	@PermitAll
 	@Path("{id}/zonas")
 	@GET
-	@ApiOperation(
+	/*@ApiOperation(
         value = "Devuelve las zonas de un departamento",
         notes = "Devuelve las zonas un departamento buscado por id"
-    )
-	public Response listarZonasDepartamento(@ApiParam(value="id") @PathParam("id") String id){
+    )*/
+	public Response listarZonasDepartamento(/*@ApiParam(value="id")*/ @PathParam("id") String id){
 		DepartamentoApi dep = departamentoS.getDepartamento(id);
 		return Response.ok(dep.getZonas().toArray(new ZonaApi[dep.getZonas().size()])).build();
 	}
