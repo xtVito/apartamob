@@ -16,9 +16,6 @@ public class Ciudad extends BaseEntity{
 	@Column(name="CIU_NOMBRE")
 	private String nombre;
 	
-	/*@ManyToMany(mappedBy="ciudades")
-	private List<Zona> zonas = new ArrayList<Zona>();*/
-	
 	public Ciudad(){}
 	
 	public Ciudad(CiudadApi api){

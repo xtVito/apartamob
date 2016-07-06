@@ -43,6 +43,13 @@ public class Unidad extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Propiedad> propiedades = new ArrayList<Propiedad>();
 	
+	@OneToMany(cascade= CascadeType.ALL)
+	@JoinTable(name="SERVICIOS_UNIDAD",
+			joinColumns={@JoinColumn(name="UNI_ID", referencedColumnName="ID")},
+			inverseJoinColumns={@JoinColumn(name="SER_ID", referencedColumnName="ID")})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Servicio> servicios = new ArrayList<Servicio>();
+	
 	public Unidad(){}
 
 	public String getNombre() {
@@ -107,5 +114,13 @@ public class Unidad extends BaseEntity{
 
 	public void setPropiedades(List<Propiedad> propiedades) {
 		this.propiedades = propiedades;
+	}
+
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
 	}
 }

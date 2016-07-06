@@ -1,6 +1,7 @@
 package co.com.aptamob.core.api.zona;
 
 import co.com.aptamob.core.api.ciudad.CiudadApi;
+import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Ciudad;
 import co.com.aptamob.core.bo.Zona;
 
@@ -11,15 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class ZonaApi {
-	private String id;
-	
-	@NotNull
-	@Length(max=50)
-	private String nombre;
+public class ZonaApi extends BaseApi{
 	
 	private List<CiudadApi> ciudades = new ArrayList<CiudadApi>();
 	
@@ -30,20 +24,12 @@ public class ZonaApi {
 			ciudades.add(new CiudadApi(ciu));
 		}
 	}
-	
-	public String getId() {
-		return id;
+
+	public List<CiudadApi> getCiudades() {
+		return ciudades;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setCiudades(List<CiudadApi> ciudades) {
+		this.ciudades = ciudades;
 	}
 }

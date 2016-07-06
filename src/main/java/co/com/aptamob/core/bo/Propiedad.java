@@ -57,6 +57,13 @@ public class Propiedad extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<PrecioPropiedad> precios = new ArrayList<PrecioPropiedad>();
 	
+	@OneToMany(cascade= CascadeType.ALL)
+	@JoinTable(name="SERVICIOS_PROPIEDAD",
+			joinColumns={@JoinColumn(name="PRO_ID", referencedColumnName="ID")},
+			inverseJoinColumns={@JoinColumn(name="SER_ID", referencedColumnName="ID")})
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Servicio> servicios = new ArrayList<Servicio>();
+	
 	public Propiedad(){}
 
 	public Unidad getUnidad() {
@@ -145,5 +152,13 @@ public class Propiedad extends BaseEntity{
 
 	public void setPrecios(List<PrecioPropiedad> precios) {
 		this.precios = precios;
+	}
+
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
 	}
 }

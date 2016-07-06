@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import co.com.aptamob.core.api.album.AlbumApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -31,6 +32,10 @@ public class Album extends BaseEntity{
 	private List<Foto> fotos = new ArrayList<Foto>();
 	
 	public Album(){}
+	
+	public Album(AlbumApi api){
+		this.nombre = api.getNombre();
+	}
 
 	public Propiedad getPropiedad() {
 		return propiedad;
