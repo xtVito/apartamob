@@ -1,5 +1,6 @@
 package co.com.aptamob.core.base.api;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,6 +11,7 @@ public abstract class BaseApi{
 	protected String id;
 	
 	@NotNull
+	@Valid
 	@Length(max=50)
 	protected String nombre;
 	

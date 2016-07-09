@@ -8,8 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import co.com.aptamob.core.api.departamento.DepartamentoApi;
-import co.com.aptamob.core.api.departamento.DepartamentoCreateRequest;
+import co.com.aptamob.core.api.DepartamentoApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -33,7 +32,7 @@ public class Departamento extends BaseEntity {
 	
 	public Departamento(){}
 	
-	public Departamento(DepartamentoCreateRequest api){
+	public Departamento(DepartamentoApi api){
 		this();
 		this.nombre = api.getNombre();
 	}

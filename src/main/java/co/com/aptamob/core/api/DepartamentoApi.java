@@ -1,6 +1,5 @@
-package co.com.aptamob.core.api.departamento;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.zona.ZonaApi;
 import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Departamento;
 import co.com.aptamob.core.bo.Zona;
@@ -15,6 +14,8 @@ import java.util.List;
 public class DepartamentoApi extends BaseApi{
 	
 	private List<ZonaApi> zonas = new ArrayList<ZonaApi>();
+	
+	public DepartamentoApi(){}
 	
 	public DepartamentoApi(Departamento departamento){
 		this.id = departamento.getId().toString();

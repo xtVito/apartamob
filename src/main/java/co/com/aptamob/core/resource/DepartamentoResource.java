@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import co.com.aptamob.core.api.departamento.DepartamentoApi;
-import co.com.aptamob.core.api.departamento.DepartamentoCreateRequest;
-import co.com.aptamob.core.api.zona.ZonaApi;
+import co.com.aptamob.core.api.DepartamentoApi;
+import co.com.aptamob.core.api.ZonaApi;
 import co.com.aptamob.core.service.IDepartamentoService;
 import co.com.aptamob.security.config.ApplicationConfig;
 /*import io.swagger.annotations.Api;
@@ -34,7 +33,7 @@ public class DepartamentoResource {
 	
 	@PermitAll
 	@POST
-	public Response crearDepartamento(DepartamentoCreateRequest request){
+	public Response crearDepartamento(DepartamentoApi request){
 		DepartamentoApi dep = departamentoS.createDepartamento(request);
 		URI loc = uriInfo.getAbsolutePathBuilder().path(dep.getId()).build();
 		return Response.created(loc).entity(dep).build();
@@ -43,7 +42,7 @@ public class DepartamentoResource {
 	@PermitAll
 	@PUT
 	@Path("{id}")
-	public Response editarDepartamento(@PathParam("id") String id, DepartamentoCreateRequest request){
+	public Response editarDepartamento(@PathParam("id") String id, DepartamentoApi request){
 		DepartamentoApi dep = departamentoS.saveDepartamento(request, id);
 		return Response.ok(dep).build();
 	}

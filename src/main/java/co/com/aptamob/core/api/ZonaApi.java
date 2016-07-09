@@ -1,6 +1,5 @@
-package co.com.aptamob.core.api.zona;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.ciudad.CiudadApi;
 import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Ciudad;
 import co.com.aptamob.core.bo.Zona;

@@ -2,7 +2,7 @@ package co.com.aptamob.core.bo;
 
 import javax.persistence.*;
 
-import co.com.aptamob.core.api.ciudad.CiudadApi;
+import co.com.aptamob.core.api.CiudadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity

@@ -1,9 +1,5 @@
-package co.com.aptamob.core.api.unidad;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.estado.EstadoApi;
-import co.com.aptamob.core.api.propiedad.PropiedadApi;
-import co.com.aptamob.core.api.servicio.ServicioApi;
-import co.com.aptamob.core.api.zona.ZonaApi;
 import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Servicio;
 import co.com.aptamob.core.bo.Unidad;

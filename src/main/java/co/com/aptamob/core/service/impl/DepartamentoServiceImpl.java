@@ -2,7 +2,7 @@ package co.com.aptamob.core.service.impl;
 
 import co.com.aptamob.security.config.ApplicationConfig;
 import co.com.aptamob.core.base.service.*;
-import co.com.aptamob.core.api.departamento.*;
+import co.com.aptamob.core.api.DepartamentoApi;
 import co.com.aptamob.core.bo.Departamento;
 import co.com.aptamob.core.exception.DataDuplicateException;
 import co.com.aptamob.core.exception.DataNotFoundException;
@@ -40,7 +40,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	private static final Logger LOG = LoggerFactory.getLogger(DepartamentoServiceImpl.class);
 	
 	@Transactional
-	public DepartamentoApi createDepartamento(DepartamentoCreateRequest departamentoRequest){
+	public DepartamentoApi createDepartamento(DepartamentoApi departamentoRequest){
 		validate(departamentoRequest);
         
         Departamento dep = departamentoR.findByNombre(departamentoRequest.getNombre());
@@ -54,7 +54,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	}
 	
 	@Transactional
-	public DepartamentoApi saveDepartamento(DepartamentoCreateRequest departamentoRequest, String codigo){
+	public DepartamentoApi saveDepartamento(DepartamentoApi departamentoRequest, String codigo){
 		validate(departamentoRequest);
 		
 		Departamento dep = cargaDepartamento(codigo);

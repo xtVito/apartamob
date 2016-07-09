@@ -1,10 +1,5 @@
-package co.com.aptamob.core.api.propiedad;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.album.AlbumApi;
-import co.com.aptamob.core.api.estado.EstadoApi;
-import co.com.aptamob.core.api.preciopropiedad.PrecioPropiedadApi;
-import co.com.aptamob.core.api.servicio.ServicioApi;
-import co.com.aptamob.core.api.tipopropiedad.TipoPropiedadApi;
 import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Album;
 import co.com.aptamob.core.bo.PrecioPropiedad;

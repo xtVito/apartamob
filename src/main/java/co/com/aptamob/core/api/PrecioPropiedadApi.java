@@ -1,6 +1,5 @@
-package co.com.aptamob.core.api.preciopropiedad;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.estado.EstadoApi;
 import co.com.aptamob.core.bo.PrecioPropiedad;
 
 import org.hibernate.validator.constraints.Length;

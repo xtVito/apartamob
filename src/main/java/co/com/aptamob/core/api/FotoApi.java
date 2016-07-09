@@ -1,6 +1,5 @@
-package co.com.aptamob.core.api.foto;
+package co.com.aptamob.core.api;
 
-import co.com.aptamob.core.api.estado.EstadoApi;
 import co.com.aptamob.core.bo.Foto;
 
 import org.hibernate.validator.constraints.Length;

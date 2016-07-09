@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import co.com.aptamob.core.api.zona.ZonaApi;
+import co.com.aptamob.core.api.ZonaApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
