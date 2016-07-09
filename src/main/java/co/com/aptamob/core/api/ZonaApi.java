@@ -16,6 +16,8 @@ public class ZonaApi extends BaseApi{
 	
 	private List<CiudadApi> ciudades = new ArrayList<CiudadApi>();
 	
+	public ZonaApi(){}
+	
 	public ZonaApi(Zona zona){
 		this.id = zona.getId().toString();
 		this.nombre = zona.getNombre();

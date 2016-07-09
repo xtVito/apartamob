@@ -16,6 +16,8 @@ public class AlbumApi extends BaseApi{
 	
 	private EstadoApi estado;
 	
+	public AlbumApi(){}
+	
 	public AlbumApi(Album album){
 		this.id = album.getId().toString();
 		this.nombre = album.getNombre();

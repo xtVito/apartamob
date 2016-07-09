@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import co.com.aptamob.core.api.UnidadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -25,16 +26,16 @@ public class Unidad extends BaseEntity{
 	@Column(name="UNI_LATITUD")
 	private double latitud;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="ZON_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="ZON_ID")
 	private Zona zona;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="CIU_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="CIU_ID")
 	private Ciudad ciudad;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	@OneToMany(mappedBy="unidad",
@@ -50,7 +51,25 @@ public class Unidad extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 	
-	public Unidad(){}
+	public Unidad(){
+		this.zona = new Zona();
+		this.ciudad = new Ciudad();
+		this.estado = new Estado();
+	}
+	
+	public Unidad(UnidadApi api){
+		this();
+		this.nombre = api.getNombre();
+		this.direccion = api.getDireccion();
+		this.longitud = Double.parseDouble(api.getLongitud());
+		this.latitud = Double.parseDouble(api.getLatitud());
+		this.zona = new Zona();
+		this.zona.setId(Long.parseLong(api.getZona().getId()));
+		this.ciudad = new Ciudad();
+		this.ciudad.setId(Long.parseLong(api.getZona().getCiudades().get(0).getId()));
+		this.estado = new Estado();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
+	}
 
 	public String getNombre() {
 		return nombre;

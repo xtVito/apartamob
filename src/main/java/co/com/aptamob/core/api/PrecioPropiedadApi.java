@@ -18,6 +18,8 @@ public class PrecioPropiedadApi {
 	private String mensual;
 	private EstadoApi estado;
 	
+	public PrecioPropiedadApi(){}
+	
 	public PrecioPropiedadApi(PrecioPropiedad precio){
 		this.id = precio.getId().toString();
 		this.fecha_inicio = precio.getDesde().toString();

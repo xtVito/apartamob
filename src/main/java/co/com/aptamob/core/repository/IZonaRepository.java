@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IZonaRepository extends JpaRepository<Zona, Long> {
-
+	
+	@Query("select z from Zona z where z.id = ?")
+	Zona findById(Long id);
 }

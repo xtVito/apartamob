@@ -21,7 +21,7 @@ public class Zona extends BaseEntity{
 	@Column(name="ZON_NOMBRE")
 	private String nombre;
 	
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany
 	@JoinTable(name="CIUDADES_ZONA",
 			joinColumns={@JoinColumn(name="ZON_ID", referencedColumnName="ID")},
 			inverseJoinColumns={@JoinColumn(name="CIU_ID", referencedColumnName="ID")})

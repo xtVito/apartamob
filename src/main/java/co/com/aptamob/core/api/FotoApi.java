@@ -16,6 +16,8 @@ public class FotoApi{
 	
 	private EstadoApi estado;
 	
+	public FotoApi(){}
+	
 	public FotoApi(Foto foto){
 		this.id = foto.getId().toString();
 		this.url = foto.getUrl();

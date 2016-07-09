@@ -7,6 +7,8 @@ public class ServicioApi extends BaseApi{
 	
 	private EstadoApi estado;
 	
+	public ServicioApi(){}
+	
 	public ServicioApi(Servicio servicio){
 		this.id = servicio.getId().toString();
 		this.nombre = servicio.getNombre();

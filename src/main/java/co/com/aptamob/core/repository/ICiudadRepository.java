@@ -10,7 +10,7 @@ import java.util.List;
 public interface ICiudadRepository extends JpaRepository<Ciudad, Long> {
 	
 	@Query("select c from Ciudad c where c.id = ?")
-	Ciudad findById(String id);
+	Ciudad findById(Long id);
 	
 	@Query("select c from Ciudad c join c.departamento d where d.id = ?")
 	List<Ciudad> findByDepartamentoId(String id);

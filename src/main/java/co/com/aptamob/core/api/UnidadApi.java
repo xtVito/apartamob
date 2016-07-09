@@ -22,12 +22,15 @@ public class UnidadApi extends BaseApi{
 	//private List<PropiedadApi> propiedades;
 	private List<ServicioApi> servicios = new ArrayList<ServicioApi>();
 	
+	public UnidadApi(){}
+	
 	public UnidadApi(Unidad unidad){
 		this.id = unidad.getId().toString();
 		this.nombre = unidad.getNombre();
 		this.direccion = unidad.getDireccion();
 		this.longitud = Double.toString(unidad.getLongitud());
 		this.latitud = Double.toString(unidad.getLatitud());
+		this.zona = new ZonaApi(unidad.getZona());
 		this.estado = new EstadoApi(unidad.getEstado());
 		for(Servicio s : unidad.getServicios()){
 			servicios.add(new ServicioApi(s));

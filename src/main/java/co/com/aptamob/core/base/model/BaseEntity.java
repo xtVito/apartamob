@@ -1,10 +1,23 @@
 package co.com.aptamob.core.base.model;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class BaseEntity extends AbstractPersistable<Long> {
-    public BaseEntity() {
-    }
+public abstract class BaseEntity {
+	
+	@Id
+	@GeneratedValue
+	protected Long id;
+	
+    public BaseEntity() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

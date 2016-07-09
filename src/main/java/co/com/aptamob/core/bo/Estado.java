@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.EstadoApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -14,6 +15,11 @@ public class Estado extends BaseEntity{
 	private String nombre;
 	
 	public Estado(){}
+	
+	public Estado(EstadoApi api){
+		this();
+		this.nombre = api.getNombre();
+	}
 
 	public String getNombre() {
 		return nombre;

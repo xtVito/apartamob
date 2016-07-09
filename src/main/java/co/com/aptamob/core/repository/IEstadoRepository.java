@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IEstadoRepository extends JpaRepository<Estado, Long> {
-
+	
+	@Query("select e from Estado e where e.id = ?")
+	Estado findById(Long id);
 }

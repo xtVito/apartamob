@@ -7,6 +7,8 @@ public class TipoPropiedadApi extends BaseApi{
 	
 	private EstadoApi estado;
 	
+	public TipoPropiedadApi(){}
+	
 	public TipoPropiedadApi(TipoPropiedad tipoPropiedad){
 		this.id = tipoPropiedad.getId().toString();
 		this.nombre = tipoPropiedad.getNombre();

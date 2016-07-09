@@ -40,27 +40,27 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	private static final Logger LOG = LoggerFactory.getLogger(DepartamentoServiceImpl.class);
 	
 	@Transactional
-	public DepartamentoApi createDepartamento(DepartamentoApi departamentoRequest){
-		validate(departamentoRequest);
+	public DepartamentoApi createDepartamento(DepartamentoApi request){
+		validate(request);
         
-        Departamento dep = departamentoR.findByNombre(departamentoRequest.getNombre());
+        Departamento dep = departamentoR.findByNombre(request.getNombre());
         if(dep != null){
         	throw new DataDuplicateException(getClassName(Departamento.class.getName()), getClassName(Departamento.class.getName()));
         }
-        dep = new Departamento(departamentoRequest);
+        dep = new Departamento(request);
         departamentoR.save(dep);
         
         return new DepartamentoApi(dep);
 	}
 	
 	@Transactional
-	public DepartamentoApi saveDepartamento(DepartamentoApi departamentoRequest, String codigo){
-		validate(departamentoRequest);
+	public DepartamentoApi saveDepartamento(DepartamentoApi request, String codigo){
+		validate(request);
 		
 		Departamento dep = cargaDepartamento(codigo);
 		
-		if(departamentoRequest.getNombre() != null){
-			dep.setNombre(departamentoRequest.getNombre());
+		if(request.getNombre() != null){
+			dep.setNombre(request.getNombre());
 		}
 		
 		departamentoR.save(dep);

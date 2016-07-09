@@ -28,6 +28,8 @@ public class PropiedadApi extends BaseApi{
 	private List<ServicioApi> servicios = new ArrayList<ServicioApi>();
 	private EstadoApi estado;
 	
+	public PropiedadApi(){}
+	
 	public PropiedadApi(Propiedad propiedad){
 		this.id = propiedad.getId().toString();
 		this.nombre = propiedad.getNombre();
