@@ -1,4 +1,4 @@
-package co.com.aptamob.core.service;
+package co.com.aptamob.core.service.impl;
 
 import co.com.aptamob.security.config.ApplicationConfig;
 import co.com.aptamob.core.base.service.*;
@@ -7,6 +7,7 @@ import co.com.aptamob.core.bo.Departamento;
 import co.com.aptamob.core.exception.DataDuplicateException;
 import co.com.aptamob.core.exception.DataNotFoundException;
 import co.com.aptamob.core.repository.IDepartamentoRepository;
+import co.com.aptamob.core.service.IDepartamentoService;
 import co.com.aptamob.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,21 +40,21 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	private static final Logger LOG = LoggerFactory.getLogger(DepartamentoServiceImpl.class);
 	
 	@Transactional
-	public DepartamentoApi createDepartamento(DepartamentoApi departamentoRequest){
+	public DepartamentoApi createDepartamento(DepartamentoCreateRequest departamentoRequest){
 		validate(departamentoRequest);
         
         Departamento dep = departamentoR.findByNombre(departamentoRequest.getNombre());
         if(dep != null){
         	throw new DataDuplicateException(getClassName(Departamento.class.getName()), getClassName(Departamento.class.getName()));
         }
-        
+        dep = new Departamento(departamentoRequest);
         departamentoR.save(dep);
         
         return new DepartamentoApi(dep);
 	}
 	
 	@Transactional
-	public DepartamentoApi saveDepartamento(DepartamentoApi departamentoRequest, String codigo){
+	public DepartamentoApi saveDepartamento(DepartamentoCreateRequest departamentoRequest, String codigo){
 		validate(departamentoRequest);
 		
 		Departamento dep = cargaDepartamento(codigo);
@@ -110,8 +111,8 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	}
 	
 	@Transactional
-	public void deleteDepartamento(DepartamentoApi departamentoRequest, String codigo){
-		Assert.notNull(departamentoRequest);
+	public void deleteDepartamento(String codigo){
+		//Assert.notNull(departamentoRequest);
         Assert.notNull(codigo);
         
         Departamento dep = cargaDepartamento(codigo);
