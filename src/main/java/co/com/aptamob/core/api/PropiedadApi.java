@@ -12,23 +12,43 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class PropiedadApi extends BaseApi{
 	
+	@NotNull
+	@Valid
 	@Length(max=150)
 	private String descripcion;
+	
+	@NotNull
+	@Valid
 	@Length(max=500)
 	private String detalle;
+	
+	@NotNull
+	@Valid
 	private String capacidad;
+	
+	@NotNull
+	@Valid
 	private String area;
+	
+	@NotNull
+	@Valid
 	private TipoPropiedadApi tipo;
+	
+	private EstadoApi estado;
+	
 	private List<AlbumApi> albumes = new ArrayList<AlbumApi>();
 	private List<PrecioPropiedadApi> precios = new ArrayList<PrecioPropiedadApi>();
 	private List<ServicioApi> servicios = new ArrayList<ServicioApi>();
-	private EstadoApi estado;
 	
-	public PropiedadApi(){}
+	public PropiedadApi(){
+		this.tipo = new TipoPropiedadApi();
+		this.estado = new EstadoApi();
+	}
 	
 	public PropiedadApi(Propiedad propiedad){
 		this.id = propiedad.getId().toString();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.ServicioApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -17,7 +18,15 @@ public class Servicio extends BaseEntity{
 	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
-	public Servicio(){}
+	public Servicio(){
+		this.estado = new Estado();
+	}
+	
+	public Servicio(ServicioApi api){
+		this();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
+		this.nombre = api.getNombre();
+	}
 
 	public String getNombre() {
 		return nombre;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.FotoApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -24,6 +25,12 @@ public class Foto extends BaseEntity{
 	public Foto(){
 		this.album = new Album();
 		this.estado = new Estado();
+	}
+	
+	public Foto(FotoApi api){
+		this();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
+		this.url = api.getUrl();
 	}
 
 	public Album getAlbum() {

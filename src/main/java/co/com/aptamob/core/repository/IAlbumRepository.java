@@ -8,5 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IAlbumRepository extends JpaRepository<Album, Long> {
-
+	
+	@Query("select a from Album a where a.id = ?")
+	Album findById(Long id);
+	
+	@Query("select a from Album a where a.propiedad.id = ?")
+	List<Album> findAllByPropiedad(Long idPropiedad);
+	
+	@Query("select a from Album a where a.propiedad.id = ? and a.estado.id = ?")
+	List<Album> findAllByPropiedad(Long idPropiedad, Long idEstado);
 }

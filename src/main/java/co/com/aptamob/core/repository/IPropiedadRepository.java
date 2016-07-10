@@ -9,5 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IPropiedadRepository extends IPropiedadRepositoryCustom, JpaRepository<Propiedad, Long> {
-
+	
+	@Query("select p from Propiedad p where p.id = ?")
+	Propiedad findById(Long id);
 }

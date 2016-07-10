@@ -9,15 +9,30 @@ import org.hibernate.validator.constraints.Length;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class UnidadApi extends BaseApi{
 	
+	@NotNull
+	@Valid
 	@Length(max=150)
 	private String direccion;
+	
+	@NotNull
+	@Valid
 	private String longitud;
+	
+	@NotNull
+	@Valid
 	private String latitud;
-	private ZonaApi zona;
+	
+	@NotNull
+	@Valid
+	private ZonaApi zona;	
+	
 	private EstadoApi estado;
 	//private List<PropiedadApi> propiedades;
 	private List<ServicioApi> servicios = new ArrayList<ServicioApi>();

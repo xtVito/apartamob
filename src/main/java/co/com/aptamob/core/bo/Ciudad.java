@@ -16,7 +16,9 @@ public class Ciudad extends BaseEntity{
 	@Column(name="CIU_NOMBRE")
 	private String nombre;
 	
-	public Ciudad(){}
+	public Ciudad(){
+		this.departamento = new Departamento();
+	}
 	
 	public Ciudad(CiudadApi api){
 		this();
@@ -38,12 +40,4 @@ public class Ciudad extends BaseEntity{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	/*public List<Zona> getZonas() {
-		return zonas;
-	}
-
-	public void setZonas(List<Zona> zonas) {
-		this.zonas = zonas;
-	}*/
 }

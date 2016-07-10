@@ -4,6 +4,8 @@ import co.com.aptamob.core.bo.Foto;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -11,6 +13,8 @@ public class FotoApi{
 	
 	private String id;
 	
+	@NotNull
+	@Valid
 	@Length(max=150)
 	private String url;
 	

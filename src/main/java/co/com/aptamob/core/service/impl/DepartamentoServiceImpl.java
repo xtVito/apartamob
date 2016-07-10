@@ -1,20 +1,20 @@
 package co.com.aptamob.core.service.impl;
 
 import co.com.aptamob.security.config.ApplicationConfig;
+import co.com.aptamob.core.base.api.ValidationError;
 import co.com.aptamob.core.base.service.*;
 import co.com.aptamob.core.api.DepartamentoApi;
 import co.com.aptamob.core.bo.Departamento;
 import co.com.aptamob.core.exception.DataDuplicateException;
 import co.com.aptamob.core.exception.DataNotFoundException;
+import co.com.aptamob.core.exception.UnprocessableEntityException;
 import co.com.aptamob.core.repository.IDepartamentoRepository;
 import co.com.aptamob.core.service.IDepartamentoService;
-import co.com.aptamob.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import javax.validation.Validator;
 
@@ -42,6 +42,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	@Transactional
 	public DepartamentoApi createDepartamento(DepartamentoApi request){
 		validate(request);
+		validaCampos(request);
         
         Departamento dep = departamentoR.findByNombre(request.getNombre());
         if(dep != null){
@@ -56,6 +57,8 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	@Transactional
 	public DepartamentoApi saveDepartamento(DepartamentoApi request, String codigo){
 		validate(request);
+		notNull(codigo, "Id del departamento");
+		validaCampos(request);
 		
 		Departamento dep = cargaDepartamento(codigo);
 		
@@ -70,7 +73,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	
 	@Transactional
 	public DepartamentoApi getDepartamento(String codigo){
-        Assert.notNull(codigo);
+		notNull(codigo, "Id del departamento");
         
         Departamento dep = cargaDepartamento(codigo);
         
@@ -95,7 +98,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	
 	@Transactional
 	public List<DepartamentoApi> getDepartamentos(String nombre){
-		Assert.notNull(nombre);
+		notNull(nombre, "Nombre del departamento");
 		List<DepartamentoApi> apis = new ArrayList<DepartamentoApi> ();
 		
 		List<Departamento> deps = departamentoR.findByNombreIgnoreCaseContaining(nombre);
@@ -113,7 +116,7 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 	@Transactional
 	public void deleteDepartamento(String codigo){
 		//Assert.notNull(departamentoRequest);
-        Assert.notNull(codigo);
+		notNull(codigo, "Id del departamento");
         
         Departamento dep = cargaDepartamento(codigo);
         
@@ -133,6 +136,16 @@ public class DepartamentoServiceImpl extends BaseService implements IDepartament
 		}
 		
 		return dep;
+	}
+	
+	private void validaCampos(DepartamentoApi request){
+		validationErrors = new ArrayList<ValidationError>();
+		
+		notNull(request.getNombre(), "Nombre");
+		
+		if(validationErrors.size() > 0){
+			throw new UnprocessableEntityException(validationErrors, getClassName(Departamento.class.getName()));
+		}
 	}
 	
 	@Autowired

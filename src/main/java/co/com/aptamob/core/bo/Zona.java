@@ -29,7 +29,7 @@ public class Zona extends BaseEntity{
 	private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 	
 	public Zona(){
-		
+		this.departamento = new Departamento();
 	}
 	
 	public Zona(ZonaApi api){

@@ -5,6 +5,7 @@ import co.com.aptamob.core.bo.PrecioPropiedad;
 import org.hibernate.validator.constraints.Length;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,10 +13,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PrecioPropiedadApi {
 	
 	private String id;
+	
+	@NotNull
+	@Valid
 	private String fecha_inicio;
+	
+	@NotNull
+	@Valid
 	private String fecha_fin;
+	
+	@NotNull
+	@Valid
 	private String diario;
+	
+	@NotNull
+	@Valid
 	private String mensual;
+	
 	private EstadoApi estado;
 	
 	public PrecioPropiedadApi(){}

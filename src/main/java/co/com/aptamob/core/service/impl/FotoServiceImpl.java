@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.validation.Validator;
@@ -16,9 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.aptamob.core.api.FotoApi;
+import co.com.aptamob.core.base.api.ValidationError;
 import co.com.aptamob.core.base.service.BaseService;
+import co.com.aptamob.core.bo.Departamento;
 import co.com.aptamob.core.bo.Foto;
 import co.com.aptamob.core.exception.ApplicationRuntimeException;
+import co.com.aptamob.core.exception.UnprocessableEntityException;
 import co.com.aptamob.core.repository.IFotoRepository;
 import co.com.aptamob.core.service.IFotoService;
 
@@ -82,6 +86,17 @@ public class FotoServiceImpl extends BaseService implements IFotoService {
 		SimpleDateFormat dt = new SimpleDateFormat("yyMMdd-HHmmss");
 		String[] fecha = dt.format(new Date()).split("-");
 		return fecha[0] + albumId + fecha[1] + JPG;
+	}
+	
+	private void validaCampos(FotoApi request){
+		validationErrors = new ArrayList<ValidationError>();
+		
+		notNull(request.getUrl(), "Url");
+		notNull(request.getEstado().getId(), "Estado");
+		
+		if(validationErrors.size() > 0){
+			throw new UnprocessableEntityException(validationErrors, getClassName(Departamento.class.getName()));
+		}
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.TipoPropiedadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -17,7 +18,15 @@ public class TipoPropiedad extends BaseEntity{
 	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
-	public TipoPropiedad(){}
+	public TipoPropiedad(){
+		this.estado = new Estado();
+	}
+	
+	public TipoPropiedad(TipoPropiedadApi api){
+		this();
+		this.nombre = api.getNombre();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
+	}
 
 	public String getNombre() {
 		return nombre;

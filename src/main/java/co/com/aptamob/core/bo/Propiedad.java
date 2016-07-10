@@ -8,6 +8,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import co.com.aptamob.core.api.PropiedadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 import co.com.aptamob.security.bo.Usuario;
 
@@ -62,7 +63,21 @@ public class Propiedad extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Servicio> servicios = new ArrayList<Servicio>();
 	
-	public Propiedad(){}
+	public Propiedad(){
+		this.unidad = new Unidad();
+		this.usuario = new Usuario();
+		this.tipoPropiedad = new TipoPropiedad();
+		this.estado = new Estado();
+	}
+	
+	public Propiedad(PropiedadApi api){
+		this();
+		this.nombre = api.getNombre();
+		this.descripcion = api.getDescripcion();
+		this.detalle = api.getDetalle();
+		this.capacidad = Integer.parseInt(api.getCapacidad());
+		this.area = Double.parseDouble(api.getArea());
+	}
 
 	public Unidad getUnidad() {
 		return unidad;

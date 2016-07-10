@@ -12,8 +12,8 @@ public interface ICiudadRepository extends JpaRepository<Ciudad, Long> {
 	@Query("select c from Ciudad c where c.id = ?")
 	Ciudad findById(Long id);
 	
-	@Query("select c from Ciudad c join c.departamento d where d.id = ?")
-	List<Ciudad> findByDepartamentoId(String id);
+	@Query("select c from Ciudad c where c.departamento.id = ?")
+	List<Ciudad> findByDepartamentoId(String idDepartamento);
 	
 	List<Ciudad> findByNombreIgnoreCaseContaining(String nombre);
 }

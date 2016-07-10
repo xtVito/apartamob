@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ITipoPropiedadRepository extends JpaRepository<TipoPropiedad, Long> {
-
+	
+	@Query("select tp from TipoPropiedad tp where tp.id = ?")
+	TipoPropiedad findById(Long id);
 }

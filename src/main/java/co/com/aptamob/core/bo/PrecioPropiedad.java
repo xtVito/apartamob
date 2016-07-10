@@ -1,12 +1,15 @@
 package co.com.aptamob.core.bo;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
+import co.com.aptamob.core.api.PrecioPropiedadApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
@@ -32,7 +35,19 @@ public class PrecioPropiedad extends BaseEntity{
 	@Column(name="PPR_MES")
 	private BigDecimal mensual;
 	
-	public PrecioPropiedad(){}
+	public PrecioPropiedad(){
+		this.propiedad = new Propiedad();
+		this.estado = new Estado();
+	}
+	
+	public PrecioPropiedad(PrecioPropiedadApi api){
+		this();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
+		this.desde = formatoFecha(api.getFecha_inicio());
+		this.hasta = formatoFecha(api.getFecha_fin());
+		this.diario = new BigDecimal(api.getDiario());
+		this.mensual = new BigDecimal(api.getMensual());
+	}
 
 	public Propiedad getPropiedad() {
 		return propiedad;
@@ -80,5 +95,16 @@ public class PrecioPropiedad extends BaseEntity{
 
 	public void setMensual(BigDecimal mensual) {
 		this.mensual = mensual;
+	}
+	
+	private Date formatoFecha(String fecha){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date fechaR = new Date();
+		try {
+			fechaR = formatter.parse(fecha);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return fechaR;
 	}
 }

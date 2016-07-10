@@ -62,11 +62,8 @@ public class Unidad extends BaseEntity{
 		this.direccion = api.getDireccion();
 		this.longitud = Double.parseDouble(api.getLongitud());
 		this.latitud = Double.parseDouble(api.getLatitud());
-		this.zona = new Zona();
 		this.zona.setId(Long.parseLong(api.getZona().getId()));
-		this.ciudad = new Ciudad();
 		this.ciudad.setId(Long.parseLong(api.getZona().getCiudades().get(0).getId()));
-		this.estado = new Estado();
 		this.estado.setId(Long.parseLong(api.getEstado().getId()));
 	}
 

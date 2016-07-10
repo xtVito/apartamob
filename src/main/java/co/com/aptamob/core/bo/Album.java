@@ -30,10 +30,15 @@ public class Album extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Foto> fotos = new ArrayList<Foto>();
 	
-	public Album(){}
+	public Album(){
+		this.propiedad = new Propiedad();
+		this.estado = new Estado();
+	}
 	
 	public Album(AlbumApi api){
+		this();
 		this.nombre = api.getNombre();
+		this.estado.setId(Long.parseLong(api.getEstado().getId()));
 	}
 
 	public Propiedad getPropiedad() {
