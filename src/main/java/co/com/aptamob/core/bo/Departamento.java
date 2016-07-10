@@ -19,14 +19,12 @@ public class Departamento extends BaseEntity {
 	private String nombre;
 	
 	@OneToMany(mappedBy="departamento",
-            targetEntity=Zona.class,
-            cascade= CascadeType.ALL)
+            targetEntity=Zona.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Zona> zonas = new ArrayList<Zona>();
 	
 	@OneToMany(mappedBy="departamento",
-            targetEntity=Ciudad.class,
-            cascade= CascadeType.ALL)
+            targetEntity=Ciudad.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 	

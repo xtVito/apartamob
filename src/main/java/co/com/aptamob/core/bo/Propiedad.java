@@ -22,12 +22,12 @@ public class Propiedad extends BaseEntity{
 	@JoinColumn(name = "USU_ID")
 	private Usuario usuario;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="TPR_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="TPR_ID")
 	private TipoPropiedad tipoPropiedad;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	@Column(name="PRO_NOMBRE")
@@ -46,18 +46,16 @@ public class Propiedad extends BaseEntity{
 	private double area;
 	
 	@OneToMany(mappedBy="propiedad",
-            targetEntity=Album.class,
-            cascade= CascadeType.ALL)
+            targetEntity=Album.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Album> albumes = new ArrayList<Album>();
 	
 	@OneToMany(mappedBy="propiedad",
-            targetEntity=PrecioPropiedad.class,
-            cascade= CascadeType.ALL)
+            targetEntity=PrecioPropiedad.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<PrecioPropiedad> precios = new ArrayList<PrecioPropiedad>();
 	
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany
 	@JoinTable(name="SERVICIOS_PROPIEDAD",
 			joinColumns={@JoinColumn(name="PRO_ID", referencedColumnName="ID")},
 			inverseJoinColumns={@JoinColumn(name="SER_ID", referencedColumnName="ID")})

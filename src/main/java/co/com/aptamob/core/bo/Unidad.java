@@ -39,12 +39,11 @@ public class Unidad extends BaseEntity{
 	private Estado estado;
 	
 	@OneToMany(mappedBy="unidad",
-            targetEntity=Propiedad.class,
-            cascade= CascadeType.ALL)
+            targetEntity=Propiedad.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Propiedad> propiedades = new ArrayList<Propiedad>();
 	
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany
 	@JoinTable(name="SERVICIOS_UNIDAD",
 			joinColumns={@JoinColumn(name="UNI_ID", referencedColumnName="ID")},
 			inverseJoinColumns={@JoinColumn(name="SER_ID", referencedColumnName="ID")})

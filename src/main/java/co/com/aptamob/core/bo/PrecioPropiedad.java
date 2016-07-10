@@ -16,8 +16,8 @@ public class PrecioPropiedad extends BaseEntity{
 	@JoinColumn(name = "PRO_ID")
 	private Propiedad propiedad;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	@Column(name="PPR_FECHA_INI")

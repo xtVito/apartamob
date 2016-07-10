@@ -13,8 +13,8 @@ public class TipoPropiedad extends BaseEntity{
 	@Column(name="TPR_NOMBRE")
 	private String nombre;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	public TipoPropiedad(){}

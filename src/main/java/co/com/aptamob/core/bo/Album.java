@@ -18,16 +18,15 @@ public class Album extends BaseEntity{
 	@JoinColumn(name = "PRO_ID")
 	private Propiedad propiedad;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	@Column(name="ALB_NOMBRE")
 	private String nombre;
 	
 	@OneToMany(mappedBy="album",
-            targetEntity=Foto.class,
-            cascade= CascadeType.ALL)
+            targetEntity=Foto.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Foto> fotos = new ArrayList<Foto>();
 	

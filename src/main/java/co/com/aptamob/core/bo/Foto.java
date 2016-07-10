@@ -14,14 +14,17 @@ public class Foto extends BaseEntity{
 	@JoinColumn(name = "ALB_ID")
 	private Album album;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="EST_ID", unique= true, nullable=true, insertable=true, updatable=true)
+	@OneToOne
+	@JoinColumn(name="EST_ID")
 	private Estado estado;
 	
 	@Column(name="FOT_URL")
 	private String url;
 	
-	private Foto(){}
+	public Foto(){
+		this.album = new Album();
+		this.estado = new Estado();
+	}
 
 	public Album getAlbum() {
 		return album;
