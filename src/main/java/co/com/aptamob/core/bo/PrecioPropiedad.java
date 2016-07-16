@@ -38,6 +38,8 @@ public class PrecioPropiedad extends BaseEntity{
 	public PrecioPropiedad(){
 		this.propiedad = new Propiedad();
 		this.estado = new Estado();
+		this.desde = new Date();
+		this.hasta = new Date();
 	}
 	
 	public PrecioPropiedad(PrecioPropiedadApi api){

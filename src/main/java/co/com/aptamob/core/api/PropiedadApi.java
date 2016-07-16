@@ -62,12 +62,12 @@ public class PropiedadApi extends BaseApi{
 		for(Album a : propiedad.getAlbumes()){
 			albumes.add(new AlbumApi(a));
 		}
-		for(PrecioPropiedad pp : propiedad.getPrecios()){
+		/*for(PrecioPropiedad pp : propiedad.getPrecios()){
 			precios.add(new PrecioPropiedadApi(pp));
 		}
 		for(Servicio s : propiedad.getServicios()){
 			servicios.add(new ServicioApi(s));
-		}
+		}*/
 	}
 
 	public String getDescripcion() {

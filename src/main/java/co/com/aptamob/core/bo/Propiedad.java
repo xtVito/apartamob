@@ -51,23 +51,25 @@ public class Propiedad extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Album> albumes = new ArrayList<Album>();
 	
-	@OneToMany(mappedBy="propiedad",
+	/*@OneToMany(mappedBy="propiedad",
             targetEntity=PrecioPropiedad.class)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<PrecioPropiedad> precios = new ArrayList<PrecioPropiedad>();
+	private List<PrecioPropiedad> precios;
 	
 	@OneToMany
 	@JoinTable(name="SERVICIOS_PROPIEDAD",
 			joinColumns={@JoinColumn(name="PRO_ID", referencedColumnName="ID")},
 			inverseJoinColumns={@JoinColumn(name="SER_ID", referencedColumnName="ID")})
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Servicio> servicios = new ArrayList<Servicio>();
+	private List<Servicio> servicios;*/
 	
 	public Propiedad(){
 		this.unidad = new Unidad();
 		this.usuario = new Usuario();
 		this.tipoPropiedad = new TipoPropiedad();
 		this.estado = new Estado();
+		//this.precios = new ArrayList<PrecioPropiedad>();
+		//this.servicios = new ArrayList<Servicio>();
 	}
 	
 	public Propiedad(PropiedadApi api){
@@ -159,7 +161,7 @@ public class Propiedad extends BaseEntity{
 		this.albumes = albumes;
 	}
 
-	public List<PrecioPropiedad> getPrecios() {
+	/*public List<PrecioPropiedad> getPrecios() {
 		return precios;
 	}
 
@@ -173,5 +175,5 @@ public class Propiedad extends BaseEntity{
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
-	}
+	}*/
 }

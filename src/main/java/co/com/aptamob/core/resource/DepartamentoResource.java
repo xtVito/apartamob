@@ -56,7 +56,6 @@ public class DepartamentoResource {
 	}
 	
 	@PermitAll
-	@Path("all")
 	@GET
 	public Response listarDepartamentos(){
 		List<DepartamentoApi> deps = departamentoS.getDepartamentos();

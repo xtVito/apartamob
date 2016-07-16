@@ -6,9 +6,9 @@
             </Pattern>
         </layout>
     </appender>
-    <logger name="co.com.aptamob" level="DEBUG"/>
+    <logger name="co.com.aptamob" level="ERROR"/>
 
-    <root level="INFO">
+    <root level="ERROR">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
