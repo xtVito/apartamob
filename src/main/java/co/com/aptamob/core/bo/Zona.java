@@ -28,9 +28,7 @@ public class Zona extends BaseEntity{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 	
-	public Zona(){
-		this.departamento = new Departamento();
-	}
+	public Zona(){}
 	
 	public Zona(ZonaApi api){
 		this();

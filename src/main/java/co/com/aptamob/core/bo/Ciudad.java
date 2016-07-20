@@ -16,9 +16,7 @@ public class Ciudad extends BaseEntity{
 	@Column(name="CIU_NOMBRE")
 	private String nombre;
 	
-	public Ciudad(){
-		this.departamento = new Departamento();
-	}
+	public Ciudad(){}
 	
 	public Ciudad(CiudadApi api){
 		this();

@@ -1,16 +1,13 @@
 package co.com.aptamob.core.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
-
 import co.com.aptamob.core.api.ServicioApi;
 import co.com.aptamob.core.base.model.BaseEntity;
 
 @Entity
 @Table(name="SERVICIOS")
 public class Servicio extends BaseEntity{
+	
 	@Column(name="SER_NOMBRE")
 	private String nombre;
 	
@@ -23,7 +20,7 @@ public class Servicio extends BaseEntity{
 	}
 	
 	public Servicio(ServicioApi api){
-		this();
+		this();	
 		this.estado.setId(Long.parseLong(api.getEstado().getId()));
 		this.nombre = api.getNombre();
 	}

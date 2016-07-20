@@ -1,16 +1,11 @@
 package co.com.aptamob.core.api;
 
+import co.com.aptamob.core.api.CiudadApi;
 import co.com.aptamob.core.base.api.BaseApi;
 import co.com.aptamob.core.bo.Ciudad;
 import co.com.aptamob.core.bo.Zona;
-
-import org.hibernate.validator.constraints.Length;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.constraints.NotNull;
 
 public class ZonaApi extends BaseApi{
 	
